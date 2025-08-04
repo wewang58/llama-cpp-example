@@ -1,16 +1,15 @@
-/bin/bash
-# 构建镜像
-#podman build -t mistral-api .
+#!/usr/bin/env bash
+podman build quay.io/$QUAY_USER/mistral:$IMAGE_TAG .
 
-# 运行容器
+# Running container
 podman run -d \
   --name mistral-service \
-  -p 8000:8000 \
+  -p 8080:8080 \
   --security-opt=no-new-privileges \
   --read-only \
   --tmpfs /tmp \
-  quay.io/wewang58/mistral-api
+  quay.io/$QUAY_USER/mistral:$IMAGE_TAG
 
-# 查看日志
+# Check logs
 podman logs -f mistral-service
 

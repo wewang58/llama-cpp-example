@@ -1,0 +1,22 @@
+apiVersion: leaderworkerset.x-k8s.io/v1
+kind: LeaderWorkerSet
+metadata:
+  name: leaderworkerset-sample
+spec:
+  replicas: 1
+  leaderWorkerTemplate:
+    size: 2
+    workerTemplate:
+      spec:
+        containers:
+        - name: mistral
+          image: quay.io/{QUAY_USER}/mistral:{your_image_tag}
+          resources:
+            limits:
+              cpu: "4"
+              memory: "4Gi"
+            requests:
+              cpu: "2"
+              memory: "4Gi"
+          ports:
+          - containerPort: 8080

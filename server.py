@@ -32,12 +32,11 @@ async def generate_text(request: GenerationRequest):
             prompt=request.prompt,
             max_tokens=request.max_tokens,
             temperature=request.temperature
-           # top_p=request.top_p
         )
         return {"response": output["choices"][0]["text"]}
     except Exception as e:
         raise HTTPException(500, detail=str(e))
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
 
